@@ -3,6 +3,7 @@ import { useBox } from "@react-three/cannon";
 const debug = false;
 
 export function ColliderBox({ position, scale }) {
+  //장애물 물리엔진 충돌체 생성
   useBox(() => ({
     args: scale,
     position,

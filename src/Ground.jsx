@@ -6,11 +6,12 @@ import { BufferAttribute } from "three";
 import { TextureLoader } from "three/src/loaders/TextureLoader";
 
 export function Ground() {
+  //지면 생성 중력으로 지속적으로 떨어지는 것을 방지하기 위해 Static으로 생성
   const [ref] = usePlane(
-    () => ({ 
-      type: 'Static', 
-      rotation: [-Math.PI / 2, 0, 0] }
-    ), 
+    () => ({
+      type: "Static",
+      rotation: [-Math.PI / 2, 0, 0],
+    }),
     useRef(null)
   );
 
@@ -33,7 +34,6 @@ export function Ground() {
     gridMap.anisotropy = 16;
   }, [gridMap]);
 
-
   const meshRef = useRef(null);
   const meshRef2 = useRef(null);
   useEffect(() => {
@@ -43,7 +43,6 @@ export function Ground() {
     var uvs2 = meshRef2.current.geometry.attributes.uv.array;
     meshRef2.current.geometry.setAttribute("uv2", new BufferAttribute(uvs2, 2));
   }, [meshRef.current]);
-
 
   return (
     <>
@@ -76,7 +75,6 @@ export function Ground() {
           envMapIntensity={0.35}
           metalness={0.05}
           roughness={0.4}
-
           dithering={true}
           blur={[1024, 512]} // Blur ground reflections (width, heigt), 0 skips blur
           mixBlur={3} // How much blur mixes with surface roughness (default = 1)
