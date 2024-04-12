@@ -6,7 +6,6 @@ import { BufferAttribute } from "three";
 import { TextureLoader } from "three/src/loaders/TextureLoader";
 
 export function Ground() {
-  //지면 생성 중력으로 지속적으로 떨어지는 것을 방지하기 위해 Static으로 생성
   const [ref] = usePlane(
     () => ({
       type: "Static",
@@ -30,13 +29,18 @@ export function Ground() {
     process.env.PUBLIC_URL + "/textures/alpha-map.png"
   );
 
+  const meshRef = useRef(null);
+  const meshRef2 = useRef(null);
+
   useEffect(() => {
+    if (!gridMap) return;
+
     gridMap.anisotropy = 16;
   }, [gridMap]);
 
-  const meshRef = useRef(null);
-  const meshRef2 = useRef(null);
   useEffect(() => {
+    if (!meshRef.current) return;
+
     var uvs = meshRef.current.geometry.attributes.uv.array;
     meshRef.current.geometry.setAttribute("uv2", new BufferAttribute(uvs, 2));
 
@@ -88,7 +92,7 @@ export function Ground() {
           depthToBlurRatioBias={0.25} // Adds a bias factor to the depthTexture before calculating the blur amount [bl
           debug={0}
           reflectorOffset={0.02} // Offsets the virtual camera that projects the reflection. Useful when the reflective
-        />
+        ></MeshReflectorMaterial>
       </mesh>
     </>
   );
