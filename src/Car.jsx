@@ -12,7 +12,7 @@ export function Car({ thirdPerson }) {
   // https://sketchfab.com/3d-models/low-poly-car-muscle-car-2-ac23acdb0bd54ab38ea72008f3312861
   let result = useLoader(
     GLTFLoader,
-    process.env.PUBLIC_URL + "/models/car.glb"
+    process.env.PUBLIC_URL + "/models/curiosity_jaeha.glb"
   ).scene;
 
   const position = [-1.5, 0.5, 3];
@@ -71,7 +71,8 @@ export function Car({ thirdPerson }) {
     if (!result) return;
 
     let mesh = result;
-    mesh.scale.set(0.0012, 0.0012, 0.0012);
+    mesh.scale.set(0.022, 0.022, 0.022);
+    mesh.rotateY(Math.PI / 1.1311);
 
     mesh.children[0].position.set(-365, -18, -67);
   }, [result]);
